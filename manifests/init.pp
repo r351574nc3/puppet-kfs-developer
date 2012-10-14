@@ -1,4 +1,4 @@
-# = Class: kfs-developer
+# = Class: kfsdeveloper
 #
 # Install KFS workspace for developers along with any dependencies.
 #
@@ -10,7 +10,7 @@
 # == Requires:
 #   - Module['Archive']
 #
-class kfs-developer {
+class kfsdeveloper {
 	$home      = "/home/kuali"
 	$workspace = "${home}/workspace"
     $username  = "kuldemo"
@@ -58,7 +58,7 @@ class kfs-developer {
         path    => '/etc/my.cnf',
         ensure  => file,
         require => Package['mysql-server'],
-        source  => "puppet://kfs-developer/my.cnf",
+        source  => "puppet://modules/kfsdeveloper/my.cnf",
         notify  => Archive::Download["apache-maven-3.0.4-bin.tar.gz"]
     }
     
@@ -135,7 +135,7 @@ class kfs-developer {
         group   => 'kuali',
         ensure  => file,
         require => File['kfs'],
-        source  => "puppet://kfs-developer/MessageBuilder.java",
+        source  => "puppet://modules/kfsdeveloper/MessageBuilder.java",
     }
 
     exec { "svn-checkout-impex" :
@@ -197,7 +197,7 @@ class kfs-developer {
         group   => kuali,
         mode    => 0755,
         path    => "${workspace}/kfs-build.properties",
-        content => template('puppet://modules/kfs-developer/kfs-build-properties.erb'),
+        content => template('puppet://modules/kfsdeveloper/kfs-build-properties.erb'),
         notify  => Exec["demo-impex-load"]
     }
 
