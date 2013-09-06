@@ -58,7 +58,7 @@ class kfsdeveloper {
         path    => '/etc/my.cnf',
         ensure  => file,
         require => Package['mysql-server'],
-        source  => "puppet://modules/kfsdeveloper/my.cnf",
+        source  => "puppet:///modules/kfsdeveloper/my.cnf",
         notify  => Archive::Download["apache-maven"]
     }
     
