@@ -69,7 +69,7 @@ class kfsdeveloper {
         notify        => Archive::Extract["apache-maven-3.1.0-bin.tar.gz"]
     }
 
-    archive::extract { "apache-maven-3.1.0-bin.tar.gz" :
+    archive::extract { "apache-maven-3.1.0-bin" :
         ensure     => present,
         target     => "/usr/java",
         require    => Archive::Download["apache-maven-3.1.0-bin.tar.gz"]
