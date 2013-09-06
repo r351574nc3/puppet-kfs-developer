@@ -57,7 +57,7 @@ class kfsdeveloper {
     file { 'my.cnf' :
         path    => '/etc/my.cnf',
         ensure  => file,
-        require => Package['community-mysql-server.i686'],
+        require => Package['mariadb-server'],
         source  => "puppet:///modules/kfsdeveloper/files/my.cnf",
         notify  => Archive::Download["apache-maven"]
     }
