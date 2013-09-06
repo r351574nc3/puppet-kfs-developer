@@ -133,6 +133,13 @@ class kfsdeveloper {
         require => Exec['svn-checkout-kfs']
     }
 
+    file { "${workspace}/kfs-4.1.1":
+        ensure => "directory",
+        owner  => "kuali",
+        group  => "kuali",
+        require => Exec['svn-checkout-kfs']
+    }
+
     file { 'MessageBuilder.java':
         path    => '/home/kuali/workspace/kfs/work/src/org/kuali/kfs/sys/MessageBuilder.java',
         owner   => 'kuali',
@@ -149,12 +156,27 @@ class kfsdeveloper {
         require  => File["${workspace}"]
     }
 
+    file { "${workspace}/kul-cfg-dbs":
+        ensure => "directory",
+        owner  => "kuali",
+        group  => "kuali",
+        require => File['svn-checkout-impex']
+    }
+
     exec { "svn-checkout-kfs-cfg-dbs" :
         command  => "svn co http://svn.kuali.org/repos/kfs/legacy/cfg-dbs/branches/release-5-0/ ${workspace}/kfs-cfg-dbs",
         creates  => "${workspace}/kfs-cfg-dbs",
         timeout  => "720",
         require  => File["${workspace}"]
     }
+
+    file { "${workspace}/kfs-cfg-dbs":
+        ensure => "directory",
+        owner  => "kuali",
+        group  => "kuali",
+        require => File['svn-checkout-kfs-cfg-dbs']
+    }
+
 
     file { "datasets" :
         ensure  => directory,
