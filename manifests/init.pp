@@ -149,6 +149,15 @@ class kfsdeveloper {
         source  => "puppet:///modules/kfsdeveloper/MessageBuilder.java",
     }
 
+    file { 'SpringContext.java':
+        path    => '/home/kuali/workspace/kfs/work/src/org/kuali/kfs/sys/context/SpringContext.java',
+        owner   => 'kuali',
+        group   => 'kuali',
+        ensure  => file,
+        require => File['kfs'],
+        source  => "puppet:///modules/kfsdeveloper/SpringContext.java",
+    }
+
     exec { "svn-checkout-impex" :
         command  => "svn co https://svn.kuali.org/repos/foundation/db-utils/branches/clover-integration ${workspace}/kul-cfg-dbs",
         creates  => "${workspace}/kul-cfg-dbs",
@@ -231,6 +240,6 @@ class kfsdeveloper {
         command  => "ant -Dimpex.properties.file=${workspace}/impex-build.properties drop-schema create-schema import",
         timeout  => "3600",
         cwd      => "${workspace}/kul-cfg-dbs/impex",
-        require  => [ File["demo-impex-build-properties"], Archive::Extract["apache-ant-1.9.2-bin"], File["/usr/bin/ant"] ]
+        require  => [ File["demo-impex-build-properties"], Archive::Extract["apache-ant-1.9.2-bin"], File["/usr/bin/ant"], File['SpringContext'] ]
     }
 }
