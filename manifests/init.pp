@@ -25,10 +25,6 @@ class kfsdeveloper {
         ensure => present,
     }
 
-    group { "kuali":
-        ensure => present,
-    }
-
     user { "kuali":
         password   => 'kuali',
         groups     => ['kuali', 'wheel', 'eclipse'],
