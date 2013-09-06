@@ -65,7 +65,7 @@ class kfsdeveloper {
     archive::download { "apache-maven" :
         ensure        => present,
         url           => "http://apache.osuosl.org/maven/maven-3/3.1.0/binaries/apache-maven-3.1.0-bin.tar.gz",
-        digest_string => "e513740978238cb9e4d482103751f6b7",
+        digest_string => "e251cf1a584b4a5f13ae118abaacd08a",
         notify        => Archive::Extract["apache-maven"]
     }
 
