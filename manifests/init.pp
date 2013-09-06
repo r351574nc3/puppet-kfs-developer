@@ -43,14 +43,14 @@ class kfsdeveloper {
         require => Package["glibc.i686"]
     }
 
-    package { "community-mysql-server.i686" :
+    package { "mariadb-server" :
         ensure => installed
     }
 
     service { "mysqld" :
         ensure     => running,
         enable     => true,
-        require    => Package["community-mysql-server.i686"],
+        require    => Package["mariadb-server"],
         subscribe  => File['my.cnf']
     }
 
