@@ -38,6 +38,13 @@ import.torque.database.user=<%= username %>
 import.torque.database.schema=<%= schema %>
 import.torque.database.password=<%= password %>
 
+export.torque.database = mysql
+export.torque.database.driver = com.mysql.jdbc.Driver
+export.torque.database.url = jdbc:mysql://localhost:3306/<%= schema %>
+export.torque.database.user=<%= username %>
+export.torque.database.schema=<%= schema %>
+export.torque.database.password=<%= password %>
+
 post.import.liquibase.project=kfs
 # after data import, have impex run liquibase scripts in this directory
 # the scripts will be run in file name order within this directory
