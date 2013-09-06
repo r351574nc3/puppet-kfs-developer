@@ -126,7 +126,7 @@ class kfsdeveloper {
     file { 'kfs' :
         ensure  => link, 
         path    => "${workspace}/kfs",
-        target  => "${workspace}/kfs-5.0",
+        target  => "${workspace}/kfs-4.1.1",
         require => Exec['svn-checkout-kfs']
     }
 
