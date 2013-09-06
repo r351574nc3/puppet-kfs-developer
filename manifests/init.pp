@@ -58,7 +58,7 @@ class kfsdeveloper {
         path    => '/etc/my.cnf',
         ensure  => file,
         require => Package['mariadb-server'],
-        source  => "puppet:///modules/kfsdeveloper/files/my.cnf",
+        source  => "puppet:///modules/kfsdeveloper/my.cnf",
         notify  => Archive::Download["apache-maven"]
     }
     
@@ -136,7 +136,7 @@ class kfsdeveloper {
         group   => 'kuali',
         ensure  => file,
         require => File['kfs'],
-        source  => "puppet:///modules/kfsdeveloper/files/MessageBuilder.java",
+        source  => "puppet:///modules/kfsdeveloper/MessageBuilder.java",
     }
 
     exec { "svn-checkout-impex" :
