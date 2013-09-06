@@ -59,7 +59,7 @@ class kfsdeveloper {
         ensure  => file,
         require => Package['mariadb-server'],
         source  => "puppet:///modules/kfsdeveloper/my.cnf",
-        notify  => Archive::Download["apache-maven"]
+        notify  => Archive::Download["apache-maven-3.1.0-bin.tar.gz"]
     }
     
     archive::download { "apache-maven-3.1.0-bin.tar.gz" :
