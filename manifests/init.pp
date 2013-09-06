@@ -160,7 +160,7 @@ class kfsdeveloper {
         ensure => "directory",
         owner  => "kuali",
         group  => "kuali",
-        require => File['svn-checkout-impex']
+        require => Exec['svn-checkout-impex']
     }
 
     exec { "svn-checkout-kfs-cfg-dbs" :
@@ -174,7 +174,7 @@ class kfsdeveloper {
         ensure => "directory",
         owner  => "kuali",
         group  => "kuali",
-        require => File['svn-checkout-kfs-cfg-dbs']
+        require => Exec['svn-checkout-kfs-cfg-dbs']
     }
 
 
