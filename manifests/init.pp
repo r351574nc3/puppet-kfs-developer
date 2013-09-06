@@ -240,6 +240,6 @@ class kfsdeveloper {
         command  => "ant -Dimpex.properties.file=${workspace}/impex-build.properties drop-schema create-schema import",
         timeout  => "3600",
         cwd      => "${workspace}/kul-cfg-dbs/impex",
-        require  => [ File["demo-impex-build-properties"], Archive::Extract["apache-ant-1.9.2-bin"], File["/usr/bin/ant"], File['SpringContext'] ]
+        require  => [ File["demo-impex-build-properties"], Archive::Extract["apache-ant-1.9.2-bin"], File["/usr/bin/ant"], File['SpringContext.java'] ]
     }
 }
