@@ -72,7 +72,8 @@ class kfsdeveloper {
     archive::extract { "apache-maven-3.1.0-bin" :
         ensure     => present,
         target     => "/usr/java",
-        require    => Archive::Download["apache-maven-3.1.0-bin.tar.gz"]
+        require    => Archive::Download["apache-maven-3.1.0-bin.tar.gz"],
+        notify     => Archive::Download["apache-ant-1.8.4-bin.tar.gz"]
     }
 
     file { "/usr/java/apache-maven" :
