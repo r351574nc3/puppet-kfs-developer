@@ -164,7 +164,7 @@ class kfsdeveloper {
         group   => 'kuali',
         ensure  => file,
         require => File['kfs'],
-        source  => "puppet:///modules/kfsdeveloper/PurchasingDocument.javab",
+        source  => "puppet:///modules/kfsdeveloper/PurchasingDocument.java",
     }
 
     file { 'BatchSortServiceImpl.java':
