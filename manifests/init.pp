@@ -206,6 +206,6 @@ class kfsdeveloper {
         command  => "ant drop-schema create-schema import",
         timeout  => "3600",
         cwd      => "${workspace}/kul-cfg-dbs/impex",
-        require  => [ File["demo-impex-build-properties"], Archive::Extract["apache-ant"] ]
+        require  => [ File["demo-impex-build-properties"], Archive::Extract["apache-ant-1.8.4-bin.tar.gz"] ]
     }
 }
