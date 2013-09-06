@@ -59,25 +59,25 @@ class kfsdeveloper {
         ensure  => file,
         require => Package['mysql-server'],
         source  => "puppet://modules/kfsdeveloper/my.cnf",
-        notify  => Archive::Download["apache-maven-3.0.4-bin.tar.gz"]
+        notify  => Archive::Download["apache-maven"]
     }
     
-    archive::download { "apache-maven-3.0.4-bin.tar.gz" :
+    archive::download { "apache-maven" :
 	    ensure        => present,
-	    url           => "http://apache.osuosl.org/maven/maven-3/3.0.4/binaries/apache-maven-3.0.4-bin.tar.gz",
+	    url           => "http://apache.osuosl.org/maven/maven-3/3.1.0/binaries/apache-maven-3.1.0-bin.tar.gz",
 	    digest_string => "e513740978238cb9e4d482103751f6b7",
-        notify        => Archive::Extract["apache-maven-3.0.4-bin"]
+        notify        => Archive::Extract["apache-maven"]
     }
 
     archive::extract { "apache-maven-3.0.4-bin" :
         ensure     => present,
         target     => "/usr/java",
-        require    => Archive::Download["apache-maven-3.0.4-bin.tar.gz"]
+        require    => Archive::Download["apache-maven"]
     }
 
     file { "/usr/java/apache-maven" :
     	ensure => link,
-    	target => "/usr/java/apache-maven-3.0.4"
+    	target => "/usr/java/apache-maven-3.1.0"
     }
 
     file { "/usr/bin/mvn" :
@@ -116,8 +116,8 @@ class kfsdeveloper {
     }		
 
     exec { "svn-checkout-kfs" :
-	    command  => "svn co https://svn.kuali.org/repos/kfs/trunk ${workspace}/kfs-5.0",
-	    creates  => "${workspace}/kfs-5.0",
+	    command  => "svn co https://svn.kuali.org/repos/kfs/tags/releases/release-4-1-1/ ${workspace}/kfs-4.1.1",
+	    creates  => "${workspace}/kfs-4.1.1",
 	    timeout  => "720",
 	    require  => File["${workspace}"]
     }
