@@ -62,17 +62,17 @@ class kfsdeveloper {
         notify  => Archive::Download["apache-maven"]
     }
     
-    archive::download { "apache-maven" :
+    archive::download { "apache-maven-3.1.0-bin.tar.gz" :
         ensure        => present,
         url           => "http://apache.osuosl.org/maven/maven-3/3.1.0/binaries/apache-maven-3.1.0-bin.tar.gz",
         digest_string => "e251cf1a584b4a5f13ae118abaacd08a",
-        notify        => Archive::Extract["apache-maven"]
+        notify        => Archive::Extract["apache-maven-3.1.0-bin.tar.gz"]
     }
 
-    archive::extract { "apache-maven" :
+    archive::extract { "apache-maven-3.1.0-bin.tar.gz" :
         ensure     => present,
         target     => "/usr/java",
-        require    => Archive::Download["apache-maven"]
+        require    => Archive::Download["apache-maven-3.1.0-bin.tar.gz"]
     }
 
     file { "/usr/java/apache-maven" :
@@ -85,18 +85,18 @@ class kfsdeveloper {
         target => "/usr/java/apache-maven-3.1.0/bin/mvn"
     }
 
-    archive::download { "apache-ant" :
+    archive::download { "apache-ant-1.8.4-bin.tar.gz" :
         ensure        => present,
-        url           => "http://apache.osuosl.org//ant/binaries/apache-ant-1.8.4-bin.tar.gz",
+        url           => "http://apache.osuosl.org/ant/binaries/apache-ant-1.8.4-bin.tar.gz",
         digest_string => "f5975145d90efbbafdcabece600f716b",
-        require       => Archive::Extract["apache-maven"],
-        notify        => Archive::Extract["apache-ant"]
+        require       => Archive::Extract["apache-maven-3.1.0-bin.tar.gz"],
+        notify        => Archive::Extract["apache-ant-1.8.4-bin.tar.gz"]
     }
 
-    archive::extract { "apache-ant" :
+    archive::extract { "apache-ant-1.8.4-bin.tar.gz" :
         ensure     => present,
         target     => "/usr/java",
-        require    => Archive::Download["apache-ant"]
+        require    => Archive::Download["apache-ant-1.8.4-bin.tar.gz"]
     }
 
     file { "/usr/java/apache-ant" :
