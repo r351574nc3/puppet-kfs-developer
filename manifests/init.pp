@@ -197,7 +197,7 @@ class kfsdeveloper {
         group   => kuali,
         mode    => 0755,
         path    => "${workspace}/kfs-build.properties",
-        content => template('puppet:///modules/kfsdeveloper/kfs-build-properties.erb'),
+        content => template('kfs-build-properties.erb'),
         notify  => Exec["demo-impex-load"]
     }
 
