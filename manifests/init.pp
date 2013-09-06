@@ -69,7 +69,7 @@ class kfsdeveloper {
         notify        => Archive::Extract["apache-maven"]
     }
 
-    archive::extract { "apache-maven-3.0.4-bin" :
+    archive::extract { "apache-maven" :
         ensure     => present,
         target     => "/usr/java",
         require    => Archive::Download["apache-maven"]
@@ -82,14 +82,14 @@ class kfsdeveloper {
 
     file { "/usr/bin/mvn" :
         ensure => link,
-        target => "/usr/java/apache-maven/bin/mvn"
+        target => "/usr/java/apache-maven-3.1.0/bin/mvn"
     }
 
     archive::download { "apache-ant-1.8.4-bin.tar.gz" :
         ensure        => present,
         url           => "http://apache.osuosl.org//ant/binaries/apache-ant-1.8.4-bin.tar.gz",
         digest_string => "f5975145d90efbbafdcabece600f716b",
-        require       => Archive::Extract["apache-maven-3.0.4-bin"]
+        require       => Archive::Extract["apache-maven"]
     }
 
     archive::extract { "apache-ant-1.8.4-bin" :
