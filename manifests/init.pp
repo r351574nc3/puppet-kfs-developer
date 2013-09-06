@@ -54,14 +54,14 @@ class kfsdeveloper {
     service { "mysqld" :
         ensure     => running,
         enable     => true,
-        require    => Package["mysql-server"],
+        require    => Package["community-mysql-server.i686"],
         subscribe  => File['my.cnf']
     }
 
     file { 'my.cnf' :
         path    => '/etc/my.cnf',
         ensure  => file,
-        require => Package['mysql-server'],
+        require => Package['community-mysql-server.i686'],
         source  => "puppet:///modules/kfsdeveloper/files/my.cnf",
         notify  => Archive::Download["apache-maven"]
     }
