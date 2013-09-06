@@ -58,7 +58,7 @@ class kfsdeveloper {
         path    => '/etc/my.cnf',
         ensure  => file,
         require => Package['mysql-server'],
-        source  => "puppet:///modules/kfsdeveloper/my.cnf",
+        source  => "puppet:///modules/kfsdeveloper/files/my.cnf",
         notify  => Archive::Download["apache-maven"]
     }
     
@@ -135,7 +135,7 @@ class kfsdeveloper {
         group   => 'kuali',
         ensure  => file,
         require => File['kfs'],
-        source  => "puppet:///modules/kfsdeveloper/MessageBuilder.java",
+        source  => "puppet:///modules/kfsdeveloper/files/MessageBuilder.java",
     }
 
     exec { "svn-checkout-impex" :
@@ -197,7 +197,7 @@ class kfsdeveloper {
         group   => kuali,
         mode    => 0755,
         path    => "${workspace}/kfs-build.properties",
-        content => template('puppet:///modules/kfsdeveloper/kfs-build-properties.erb'),
+        content => template('puppet:///modules/kfsdeveloper/templates/kfs-build-properties.erb'),
         notify  => Exec["demo-impex-load"]
     }
 
