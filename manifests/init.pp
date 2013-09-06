@@ -27,7 +27,7 @@ class kfsdeveloper {
 
     user { "kuali":
         password   => 'kuali',
-        groups     => ['kuali', 'wheel', 'eclipse'],
+        groups     => ['wheel', 'eclipse'],
         comment    => 'kuali',
         ensure     => present,
         provider   => 'useradd',
