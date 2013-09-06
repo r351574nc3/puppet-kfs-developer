@@ -66,7 +66,7 @@ class kfsdeveloper {
         ensure        => present,
         url           => "http://apache.osuosl.org/maven/maven-3/3.1.0/binaries/apache-maven-3.1.0-bin.tar.gz",
         digest_string => "e251cf1a584b4a5f13ae118abaacd08a",
-        notify        => Archive::Extract["apache-maven-3.1.0-bin.tar.gz"]
+        notify        => Archive::Extract["apache-maven-3.1.0-bin"]
     }
 
     archive::extract { "apache-maven-3.1.0-bin" :
@@ -89,11 +89,11 @@ class kfsdeveloper {
         ensure        => present,
         url           => "http://apache.osuosl.org/ant/binaries/apache-ant-1.8.4-bin.tar.gz",
         digest_string => "f5975145d90efbbafdcabece600f716b",
-        require       => Archive::Extract["apache-maven-3.1.0-bin.tar.gz"],
-        notify        => Archive::Extract["apache-ant-1.8.4-bin.tar.gz"]
+        require       => Archive::Extract["apache-maven-3.1.0-bin"],
+        notify        => Archive::Extract["apache-ant-1.8.4-bin"]
     }
 
-    archive::extract { "apache-ant-1.8.4-bin.tar.gz" :
+    archive::extract { "apache-ant-1.8.4-bin" :
         ensure     => present,
         target     => "/usr/java",
         require    => Archive::Download["apache-ant-1.8.4-bin.tar.gz"]
@@ -206,6 +206,6 @@ class kfsdeveloper {
         command  => "ant drop-schema create-schema import",
         timeout  => "3600",
         cwd      => "${workspace}/kul-cfg-dbs/impex",
-        require  => [ File["demo-impex-build-properties"], Archive::Extract["apache-ant-1.8.4-bin.tar.gz"] ]
+        require  => [ File["demo-impex-build-properties"], Archive::Extract["apache-ant-1.8.4-bin"] ]
     }
 }
