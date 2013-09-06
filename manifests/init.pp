@@ -102,12 +102,14 @@ class kfsdeveloper {
 
     file { "/usr/java/apache-ant" :
         ensure => link,
-        target => "/usr/java/apache-ant-1.8.4"
+        target => "/usr/java/apache-ant-1.9.2",
+        require => Archive::Extract["apache-ant-1.9.2-bin"]
     }
 
     file { "/usr/bin/ant" :
-        ensure => link,
-        target => "/usr/java/apache-ant/bin/ant"
+        ensure  => link,
+        target  => "/usr/java/apache-ant/bin/ant",
+        require => File["/usr/java/apache-ant"]
     }
 
     file { "${workspace}" : 
@@ -207,6 +209,6 @@ class kfsdeveloper {
         command  => "ant drop-schema create-schema import",
         timeout  => "3600",
         cwd      => "${workspace}/kul-cfg-dbs/impex",
-        require  => [ File["demo-impex-build-properties"], Archive::Extract["apache-ant-1.9.2-bin"] ]
+        require  => [ File["demo-impex-build-properties"], Archive::Extract["apache-ant-1.9.2-bin"], File["/usr/bin/ant"] ]
     }
 }
