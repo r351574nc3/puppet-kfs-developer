@@ -1,5 +1,5 @@
 /*
- * Copyright 2006 The Kuali Foundation
+ * Copyright 2011 The Kuali Foundation.
  * 
  * Licensed under the Educational Community License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -429,10 +429,6 @@ public interface PurchasingDocument extends PurchasingAccountsPayableDocument {
     
     public void setDeliveryBuildingOtherIndicator(boolean deliveryBuildingOtherIndicator);
 
-    public List<PurApItem> getItems();
-
-    public void setItems(List items);
-
     /**
      * @see org.kuali.kfs.module.purap.document.PurchasingAccountsPayableDocument#getItem(int)
      */
@@ -464,7 +460,7 @@ public interface PurchasingDocument extends PurchasingAccountsPayableDocument {
      * Sets vendor contract fields based on the specified Vendor Contract.
      * 
      * @param vendorContract the specified Vendor Contract.
-     */     
+     */
     public void templateVendorContract(VendorContract vendorContract);
 
     /**

@@ -158,6 +158,33 @@ class kfsdeveloper {
         source  => "puppet:///modules/kfsdeveloper/SpringContext.java",
     }
 
+    file { 'PurchasingDocument.java':
+        path    => '/home/kuali/workspace/kfs/work/src/org/kuali/kfs/module/purap/document/PurchasingDocument.java ',
+        owner   => 'kuali',
+        group   => 'kuali',
+        ensure  => file,
+        require => File['kfs'],
+        source  => "puppet:///modules/kfsdeveloper/PurchasingDocument.javab",
+    }
+
+    file { 'BatchSortServiceImpl.java':
+        path    => '/home/kuali/workspace/kfs/work/src/org/kuali/kfs/gl/batch/service/impl/BatchSortServiceImpl.java',
+        owner   => 'kuali',
+        group   => 'kuali',
+        ensure  => file,
+        require => File['kfs'],
+        source  => "puppet:///modules/kfsdeveloper/BatchSortServiceImpl.java",
+    }
+
+    file { 'BatchSortUtil.java':
+        path    => '/home/kuali/workspace/kfs/work/src/org/kuali/kfs/gl/batch/BatchSortUtil.java',
+        owner   => 'kuali',
+        group   => 'kuali',
+        ensure  => file,
+        require => File['kfs'],
+        source  => "puppet:///modules/kfsdeveloper/BatchSortUtil.java",
+    }
+
     exec { "svn-checkout-impex" :
         command  => "svn co https://svn.kuali.org/repos/foundation/db-utils/branches/clover-integration ${workspace}/kul-cfg-dbs",
         creates  => "${workspace}/kul-cfg-dbs",
@@ -240,6 +267,12 @@ class kfsdeveloper {
         command  => "ant -Dimpex.properties.file=${workspace}/impex-build.properties drop-schema create-schema import",
         timeout  => "3600",
         cwd      => "${workspace}/kul-cfg-dbs/impex",
-        require  => [ File["demo-impex-build-properties"], Archive::Extract["apache-ant-1.9.2-bin"], File["/usr/bin/ant"], File['SpringContext.java'] ]
+        require  => [ File["demo-impex-build-properties"], 
+                      Archive::Extract["apache-ant-1.9.2-bin"], 
+                      File["/usr/bin/ant"], 
+                      File['SpringContext.java'],
+                      File['PurchasingDocument.java'],
+                      File['BatchSortUtil.java'],
+                      File['BatchSortServiceImpl.java'] ]
     }
 }
