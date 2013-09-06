@@ -47,7 +47,7 @@ class kfsdeveloper {
         require => Package["glibc.i686"]
     }
 
-    package { "mysql-server" :
+    package { "community-mysql-server.i686" :
         ensure => installed
     }
 
