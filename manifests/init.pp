@@ -11,8 +11,8 @@
 #   - Module['Archive']
 #
 class kfsdeveloper {
-	$home      = "/home/kuali"
-	$workspace = "${home}/workspace"
+    $home      = "/home/kuali"
+    $workspace = "${home}/workspace"
     $username  = "kuldemo"
     $schema    = $username
     $password  = "kuldemo"
@@ -25,34 +25,34 @@ class kfsdeveloper {
         ensure => present,
     }
 
-	user { "kuali":
-		password   => 'kuali',
-		groups     => ['kuali', 'wheel', 'admin', 'eclipse'],
-		comment    => 'kuali',
-		ensure     => present,
-		provider   => 'useradd',
-		managehome => true
-	}
+    user { "kuali":
+        password   => 'kuali',
+        groups     => ['kuali', 'wheel', 'admin', 'eclipse'],
+        comment    => 'kuali',
+        ensure     => present,
+        provider   => 'useradd',
+        managehome => true
+    }
 
-	package { "subversion" : 
-		ensure => installed
-	}
+    package { "subversion" : 
+        ensure => installed
+    }
 
-	package { "tomcat" :
-		ensure  => installed,
+    package { "tomcat" :
+        ensure  => installed,
         require => Package["glibc.i686"]
-	}
+    }
 
-	package { "mysql-server" :
-		ensure => installed
-	}
+    package { "mysql-server" :
+        ensure => installed
+    }
 
-	service { "mysqld" :
-		ensure     => running,
-		enable     => true,
-		require    => Package["mysql-server"],
+    service { "mysqld" :
+        ensure     => running,
+        enable     => true,
+        require    => Package["mysql-server"],
         subscribe  => File['my.cnf']
-	}
+    }
 
     file { 'my.cnf' :
         path    => '/etc/my.cnf',
@@ -63,9 +63,9 @@ class kfsdeveloper {
     }
     
     archive::download { "apache-maven" :
-	    ensure        => present,
-	    url           => "http://apache.osuosl.org/maven/maven-3/3.1.0/binaries/apache-maven-3.1.0-bin.tar.gz",
-	    digest_string => "e513740978238cb9e4d482103751f6b7",
+        ensure        => present,
+        url           => "http://apache.osuosl.org/maven/maven-3/3.1.0/binaries/apache-maven-3.1.0-bin.tar.gz",
+        digest_string => "e513740978238cb9e4d482103751f6b7",
         notify        => Archive::Extract["apache-maven"]
     }
 
@@ -76,20 +76,20 @@ class kfsdeveloper {
     }
 
     file { "/usr/java/apache-maven" :
-    	ensure => link,
-    	target => "/usr/java/apache-maven-3.1.0"
+        ensure => link,
+        target => "/usr/java/apache-maven-3.1.0"
     }
 
     file { "/usr/bin/mvn" :
-    	ensure => link,
-    	target => "/usr/java/apache-maven/bin/mvn"
+        ensure => link,
+        target => "/usr/java/apache-maven/bin/mvn"
     }
 
     archive::download { "apache-ant-1.8.4-bin.tar.gz" :
-	    ensure        => present,
-	    url           => "http://apache.osuosl.org//ant/binaries/apache-ant-1.8.4-bin.tar.gz",
-	    digest_string => "f5975145d90efbbafdcabece600f716b",
-	    require       => Archive::Extract["apache-maven-3.0.4-bin"]
+        ensure        => present,
+        url           => "http://apache.osuosl.org//ant/binaries/apache-ant-1.8.4-bin.tar.gz",
+        digest_string => "f5975145d90efbbafdcabece600f716b",
+        require       => Archive::Extract["apache-maven-3.0.4-bin"]
     }
 
     archive::extract { "apache-ant-1.8.4-bin" :
@@ -99,13 +99,13 @@ class kfsdeveloper {
     }
 
     file { "/usr/java/apache-ant" :
-    	ensure => link,
-    	target => "/usr/java/apache-ant-1.8.4"
+        ensure => link,
+        target => "/usr/java/apache-ant-1.8.4"
     }
 
     file { "/usr/bin/ant" :
-    	ensure => link,
-    	target => "/usr/java/apache-ant/bin/ant"
+        ensure => link,
+        target => "/usr/java/apache-ant/bin/ant"
     }
 
     file { "${workspace}" : 
@@ -113,13 +113,13 @@ class kfsdeveloper {
         owner   => "kuali",
         group   => "kuali",
         notify  => Exec['svn-checkout-kfs']
-    }		
+    }       
 
     exec { "svn-checkout-kfs" :
-	    command  => "svn co https://svn.kuali.org/repos/kfs/tags/releases/release-4-1-1/ ${workspace}/kfs-4.1.1",
-	    creates  => "${workspace}/kfs-4.1.1",
-	    timeout  => "720",
-	    require  => File["${workspace}"]
+        command  => "svn co https://svn.kuali.org/repos/kfs/tags/releases/release-4-1-1/ ${workspace}/kfs-4.1.1",
+        creates  => "${workspace}/kfs-4.1.1",
+        timeout  => "720",
+        require  => File["${workspace}"]
     }
 
     file { 'kfs' :
@@ -135,21 +135,21 @@ class kfsdeveloper {
         group   => 'kuali',
         ensure  => file,
         require => File['kfs'],
-        source  => "puppet://modules/kfsdeveloper/MessageBuilder.java",
+        source  => "puppet:///modules/kfsdeveloper/MessageBuilder.java",
     }
 
     exec { "svn-checkout-impex" :
-	    command  => "svn co https://svn.kuali.org/repos/foundation/db-utils/branches/clover-integration ${workspace}/kul-cfg-dbs",
-	    creates  => "${workspace}/kul-cfg-dbs",
-	    timeout  => "720",
-	    require  => File["${workspace}"]
+        command  => "svn co https://svn.kuali.org/repos/foundation/db-utils/branches/clover-integration ${workspace}/kul-cfg-dbs",
+        creates  => "${workspace}/kul-cfg-dbs",
+        timeout  => "720",
+        require  => File["${workspace}"]
     }
 
     exec { "svn-checkout-kfs-cfg-dbs" :
-	    command  => "svn co http://svn.kuali.org/repos/kfs/legacy/cfg-dbs/branches/release-5-0/ ${workspace}/kfs-cfg-dbs",
-	    creates  => "${workspace}/kfs-cfg-dbs",
-	    timeout  => "720",
-	    require  => File["${workspace}"]
+        command  => "svn co http://svn.kuali.org/repos/kfs/legacy/cfg-dbs/branches/release-5-0/ ${workspace}/kfs-cfg-dbs",
+        creates  => "${workspace}/kfs-cfg-dbs",
+        timeout  => "720",
+        require  => File["${workspace}"]
     }
 
     file { "datasets" :
@@ -197,14 +197,14 @@ class kfsdeveloper {
         group   => kuali,
         mode    => 0755,
         path    => "${workspace}/kfs-build.properties",
-        content => template('puppet://modules/kfsdeveloper/kfs-build-properties.erb'),
+        content => template('puppet:///modules/kfsdeveloper/kfs-build-properties.erb'),
         notify  => Exec["demo-impex-load"]
     }
 
     exec { "demo-impex-load" :
-	    command  => "ant drop-schema create-schema import",
-	    timeout  => "3600",
+        command  => "ant drop-schema create-schema import",
+        timeout  => "3600",
         cwd      => "${workspace}/kul-cfg-dbs/impex",
-	    require  => File["demo-impex-build-properties"]
+        require  => File["demo-impex-build-properties"]
     }
 }
