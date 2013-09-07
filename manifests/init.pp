@@ -13,6 +13,7 @@
 class kfsdeveloper {
     $home      = "/home/kuali"
     $workspace = "${home}/workspace"
+    $settings  = "${home}/kuali/main/dev"
     $username  = "kuldemo"
     $schema    = $username
     $password  = "kuldemo"
@@ -111,6 +112,13 @@ class kfsdeveloper {
         target  => "/usr/java/apache-ant/bin/ant",
         require => File["/usr/java/apache-ant"]
     }
+
+    file { "${settings}" : 
+        ensure  => directory,
+        owner   => "kuali",
+        group   => "kuali",
+        notify  => Exec['svn-checkout-kfs']
+    }       
 
     file { "${workspace}" : 
         ensure  => directory,
