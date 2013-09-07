@@ -270,8 +270,8 @@ class kfsdeveloper {
         owner   => kuali,
         group   => kuali,
         mode    => 0755,
-        content => template('impex-build-properties.erb'),
-        path    => "${workspace}/impex-build.properties"
+        content => puppet:///modules/kfsdeveloper/kfs-build.properties,
+        path    => "${home}/kfs-build.properties"
     }
 
     file { "demo-kfs-build-properties" :
