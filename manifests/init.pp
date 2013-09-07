@@ -281,7 +281,7 @@ class kfsdeveloper {
         mode    => 0755,
         path    => "${workspace}/kfs-build.properties",
         content => template('kfs-build-properties.erb'),
-        require => Exec['demo-kfs-build-properties']
+        require => File['kfs-build.properties']
     }
 
     exec { "demo-impex-load" :
