@@ -286,12 +286,13 @@ class kfsdeveloper {
         require => File['kfs-build.properties']
     }
 
-    exec { "dist-local" :
-        command  => "ant dist-local",
-        cwd      => "${workspace}/kfs",
-        require  => File["kfs"],
-        user     => 'kuali'
-    }
+#    exec { "dist-local" :
+#        command  => "ant dist-local",
+#        cwd      => "${workspace}/kfs",
+#        require  => File["kfs"],
+#        user     => 'kuali'
+#    }
+
     exec { "demo-impex-load" :
         command  => "ant -Dimpex.properties.file=${workspace}/impex-build.properties drop-schema create-schema import",
         timeout  => "3600",
