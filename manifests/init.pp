@@ -164,7 +164,7 @@ class kfsdeveloper {
     }
 
     file { 'PurchasingDocument.java':
-        path    => '/home/kuali/workspace/kfs/work/src/org/kuali/kfs/module/purap/document/PurchasingDocument.java ',
+        path    => '/home/kuali/workspace/kfs/work/src/org/kuali/kfs/module/purap/document/PurchasingDocument.java',
         owner   => 'kuali',
         group   => 'kuali',
         ensure  => present,
