@@ -124,6 +124,7 @@ class kfsdeveloper {
         creates  => "${workspace}/kfs-4.1.1",
         timeout  => "720",
         require  => File["${workspace}"],
+        notify   => [ File['PurchasingDocument.java'] ],
         user     => 'kuali'
     }
 
