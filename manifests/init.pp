@@ -121,11 +121,14 @@ class kfsdeveloper {
 
     exec { "svn-checkout-kfs" :
         command  => "svn co https://svn.kuali.org/repos/kfs/tags/releases/release-4-1-1/ ${workspace}/kfs-4.1.1",
+        user     => 'kuali'
         creates  => "${workspace}/kfs-4.1.1",
         timeout  => "720",
         require  => File["${workspace}"],
-        notify   => [ File['PurchasingDocument.java'] ],
-        user     => 'kuali'
+        notify   => [ File['SpringContext.java'],
+                      File['PurchasingDocument.java'],
+                      File['BatchSortUtil.java'],
+                      File['BatchSortServiceImpl.java'] ]
     }
 
     file { 'kfs' :
@@ -156,7 +159,7 @@ class kfsdeveloper {
         owner   => 'kuali',
         group   => 'kuali',
         ensure  => present,
-        require => File['kfs'],
+        require => File['svn-checkout-kfs'],
         source  => "puppet:///modules/kfsdeveloper/SpringContext.java",
     }
 
@@ -165,7 +168,7 @@ class kfsdeveloper {
         owner   => 'kuali',
         group   => 'kuali',
         ensure  => present,
-        require => File['kfs'],
+        require => Exec['svn-checkout-kfs'],
         source  => "puppet:///modules/kfsdeveloper/PurchasingDocument.java",
     }
 
@@ -174,7 +177,7 @@ class kfsdeveloper {
         owner   => 'kuali',
         group   => 'kuali',
         ensure  => present,
-        require => File['kfs'],
+        require => File['svn-checkout-kfs'],
         source  => "puppet:///modules/kfsdeveloper/BatchSortServiceImpl.java",
     }
 
@@ -183,7 +186,7 @@ class kfsdeveloper {
         owner   => 'kuali',
         group   => 'kuali',
         ensure  => present,
-        require => File['kfs'],
+        require => File['svn-checkout-kfs'],
         source  => "puppet:///modules/kfsdeveloper/BatchSortUtil.java",
     }
 
