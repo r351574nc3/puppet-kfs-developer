@@ -113,14 +113,8 @@ class kfsdeveloper {
         require => File["/usr/java/apache-ant"]
     }
 
-    file { "${settings}" : 
-        ensure  => directory,
-        owner   => "kuali",
-        group   => "kuali",
-        notify  => Exec['svn-checkout-kfs']
-    }       
-
-    file { "${workspace}" : 
+    file { [ "${home}/kuali", "${home}/kuali/main",
+             "${settings}", "${workspace} ] :
         ensure  => directory,
         owner   => "kuali",
         group   => "kuali",
