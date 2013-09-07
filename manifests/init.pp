@@ -306,7 +306,7 @@ class kfsdeveloper {
                       File['PurchasingDocument.java'],
                       File['BatchSortUtil.java'],
                       File['BatchSortServiceImpl.java'],
-                      Exec['dist-local'] ]
+                      Exec['dist-local'] ],
         user     => 'kuali'
     }
 }
