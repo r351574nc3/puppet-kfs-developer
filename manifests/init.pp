@@ -286,6 +286,12 @@ class kfsdeveloper {
         require => File['kfs-build.properties']
     }
 
+    exec { "dist-local" :
+        command  => "ant dist-local",
+        cwd      => "${workspace}/kfs",
+        require  => File["kfs"]
+        user     => 'kuali'
+    }
     exec { "demo-impex-load" :
         command  => "ant -Dimpex.properties.file=${workspace}/impex-build.properties drop-schema create-schema import",
         timeout  => "3600",
@@ -299,7 +305,8 @@ class kfsdeveloper {
                       File['SpringContext.java'],
                       File['PurchasingDocument.java'],
                       File['BatchSortUtil.java'],
-                      File['BatchSortServiceImpl.java'] ],
+                      File['BatchSortServiceImpl.java'],
+                      Exec['dist-local'] ]
         user     => 'kuali'
     }
 }
