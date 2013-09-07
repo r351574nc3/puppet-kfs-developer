@@ -253,8 +253,7 @@ class kfsdeveloper {
         group   => kuali,
         mode    => 0755,
         content => template('impex-build-properties.erb'),
-        path    => "${workspace}/impex-build.properties",
-        notify  => Exec["demo-impex-load"]
+        path    => "${workspace}/impex-build.properties"
     }
 
     file { "demo-kfs-build-properties" :
@@ -263,8 +262,7 @@ class kfsdeveloper {
         group   => kuali,
         mode    => 0755,
         path    => "${workspace}/kfs-build.properties",
-        content => template('kfs-build-properties.erb'),
-        notify  => Exec["demo-impex-load"]
+        content => template('kfs-build-properties.erb')
     }
 
     exec { "demo-impex-load" :
@@ -273,6 +271,7 @@ class kfsdeveloper {
         timeout  => "3600",
         cwd      => "${workspace}/kul-cfg-dbs/impex",
         require  => [ File["demo-impex-build-properties"], 
+                      File["demo-kfs-build-properties"],
                       Archive::Extract["apache-ant-1.9.2-bin"], 
                       File["/usr/bin/ant"], 
                       File['SpringContext.java'],
