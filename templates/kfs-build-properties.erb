@@ -28,10 +28,6 @@ tests.includes=**/*Test.java
 # this property determines what log statements will be printed by default and whether the logs go to the log file or standard out
 appenders=INFO, LogFile, StdOut
 
-# this is the kuali and workflow environment
-build.environment=dev
-external.config.directory=${user.home}/kuali/main/${build.environment}
-
 # these properties are related to ${build.environment} - you should review them, if you change that property
 # you will need to obtain the values for these properties for a given ${build.environment} from someone on the project
 datasource.username=<%= username %>
