@@ -144,7 +144,7 @@ class kfsdeveloper {
         path    => '/home/kuali/workspace/kfs/work/src/org/kuali/kfs/sys/MessageBuilder.java',
         owner   => 'kuali',
         group   => 'kuali',
-        ensure  => file,
+        ensure  => present,
         require => File['kfs'],
         source  => "puppet:///modules/kfsdeveloper/MessageBuilder.java",
     }
@@ -153,7 +153,7 @@ class kfsdeveloper {
         path    => '/home/kuali/workspace/kfs/work/src/org/kuali/kfs/sys/context/SpringContext.java',
         owner   => 'kuali',
         group   => 'kuali',
-        ensure  => file,
+        ensure  => present,
         require => File['kfs'],
         source  => "puppet:///modules/kfsdeveloper/SpringContext.java",
     }
@@ -162,7 +162,7 @@ class kfsdeveloper {
         path    => '/home/kuali/workspace/kfs/work/src/org/kuali/kfs/module/purap/document/PurchasingDocument.java ',
         owner   => 'kuali',
         group   => 'kuali',
-        ensure  => file,
+        ensure  => present,
         require => File['kfs'],
         source  => "puppet:///modules/kfsdeveloper/PurchasingDocument.java",
     }
@@ -171,7 +171,7 @@ class kfsdeveloper {
         path    => '/home/kuali/workspace/kfs/work/src/org/kuali/kfs/gl/batch/service/impl/BatchSortServiceImpl.java',
         owner   => 'kuali',
         group   => 'kuali',
-        ensure  => file,
+        ensure  => present,
         require => File['kfs'],
         source  => "puppet:///modules/kfsdeveloper/BatchSortServiceImpl.java",
     }
@@ -180,7 +180,7 @@ class kfsdeveloper {
         path    => '/home/kuali/workspace/kfs/work/src/org/kuali/kfs/gl/batch/BatchSortUtil.java',
         owner   => 'kuali',
         group   => 'kuali',
-        ensure  => file,
+        ensure  => present,
         require => File['kfs'],
         source  => "puppet:///modules/kfsdeveloper/BatchSortUtil.java",
     }
