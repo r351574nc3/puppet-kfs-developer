@@ -159,7 +159,7 @@ class kfsdeveloper {
         owner   => 'kuali',
         group   => 'kuali',
         ensure  => present,
-        require => File['svn-checkout-kfs'],
+        require => Exec['svn-checkout-kfs'],
         source  => "puppet:///modules/kfsdeveloper/SpringContext.java",
     }
 
@@ -177,7 +177,7 @@ class kfsdeveloper {
         owner   => 'kuali',
         group   => 'kuali',
         ensure  => present,
-        require => File['svn-checkout-kfs'],
+        require => Exec['svn-checkout-kfs'],
         source  => "puppet:///modules/kfsdeveloper/BatchSortServiceImpl.java",
     }
 
@@ -186,7 +186,7 @@ class kfsdeveloper {
         owner   => 'kuali',
         group   => 'kuali',
         ensure  => present,
-        require => File['svn-checkout-kfs'],
+        require => Exec['svn-checkout-kfs'],
         source  => "puppet:///modules/kfsdeveloper/BatchSortUtil.java",
     }
 
