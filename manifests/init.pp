@@ -289,7 +289,7 @@ class kfsdeveloper {
     exec { "dist-local" :
         command  => "ant dist-local",
         cwd      => "${workspace}/kfs",
-        require  => File["kfs"]
+        require  => File["kfs"],
         user     => 'kuali'
     }
     exec { "demo-impex-load" :
