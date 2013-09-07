@@ -34,12 +34,13 @@ external.config.directory=${user.home}/kuali/main/${build.environment}
 
 # these properties are related to ${build.environment} - you should review them, if you change that property
 # you will need to obtain the values for these properties for a given ${build.environment} from someone on the project
-datasource.username=@input.datasource.username@
-datasource.password=@input.datasource.password@
-mysql.datasource.url=@input.mysql.datasource.url@
+datasource.username=<%= username %>
+datasource.password=<%= password %>
+mysql.datasource.url=jdbc:mysql://localhost:3306/<%= schema %>
 oracle.datasource.url=@input.oracle.datasource.url@
 # valid values are Oracle9i and MySQL
-datasource.ojb.platform=@input.datasource.ojb.platform@
+datasource.url=${mysql.datasource.url}
+datasource.ojb.platform=MySQL
 
 # determines the mail relay server used by MailService
 mail.relay.server=[[FILL ME IN]]
