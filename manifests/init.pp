@@ -121,7 +121,7 @@ class kfsdeveloper {
 
     exec { "svn-checkout-kfs" :
         command  => "svn co https://svn.kuali.org/repos/kfs/tags/releases/release-4-1-1/ ${workspace}/kfs-4.1.1",
-        user     => 'kuali'
+        user     => 'kuali',
         creates  => "${workspace}/kfs-4.1.1",
         timeout  => "720",
         require  => File["${workspace}"],
