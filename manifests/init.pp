@@ -220,6 +220,8 @@ class kfsdeveloper {
 
     file { "datasets" :
         ensure  => directory,
+        owner   => kuali,
+        group   => kuali,       
         path    => "${workspace}/datasets",
         require => Exec["svn-checkout-kfs-cfg-dbs"],
         notify  => File["datasets-rice"]
@@ -227,6 +229,8 @@ class kfsdeveloper {
 
     file { "datasets-rice" :
         ensure  => link,
+        owner   => kuali,
+        group   => kuali,
         path    => "${workspace}/datasets/rice",
         target  => "${workspace}/kfs-cfg-dbs/rice-demo",
         require => Exec["svn-checkout-kfs-cfg-dbs"],
@@ -235,6 +239,8 @@ class kfsdeveloper {
 
     file { "datasets-kfs" :
         ensure  => link,
+        owner   => kuali,
+        group   => kuali,
         path    => "${workspace}/datasets/kfs-demo",
         target  => "${workspace}/kfs-cfg-dbs/demo",
         require => Exec["svn-checkout-kfs-cfg-dbs"],
