@@ -278,6 +278,8 @@ class kfsdeveloper {
         require  => [ File["demo-impex-build-properties"], 
                       File["demo-kfs-build-properties"],
                       Archive::Extract["apache-ant-1.9.2-bin"], 
+                      File['datasets-kfs'],
+                      File['datasets-rice'],
                       File["/usr/bin/ant"], 
                       File['SpringContext.java'],
                       File['PurchasingDocument.java'],
