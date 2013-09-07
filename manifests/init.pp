@@ -123,7 +123,8 @@ class kfsdeveloper {
         command  => "svn co https://svn.kuali.org/repos/kfs/tags/releases/release-4-1-1/ ${workspace}/kfs-4.1.1",
         creates  => "${workspace}/kfs-4.1.1",
         timeout  => "720",
-        require  => File["${workspace}"]
+        require  => File["${workspace}"],
+        user     => 'kuali'
     }
 
     file { 'kfs' :
@@ -189,7 +190,8 @@ class kfsdeveloper {
         command  => "svn co https://svn.kuali.org/repos/foundation/db-utils/branches/clover-integration ${workspace}/kul-cfg-dbs",
         creates  => "${workspace}/kul-cfg-dbs",
         timeout  => "720",
-        require  => File["${workspace}"]
+        require  => File["${workspace}"],
+        user     => 'kuali'
     }
 
     file { "${workspace}/kul-cfg-dbs":
@@ -203,7 +205,8 @@ class kfsdeveloper {
         command  => "svn co http://svn.kuali.org/repos/kfs/legacy/cfg-dbs/branches/release-5-0/ ${workspace}/kfs-cfg-dbs",
         creates  => "${workspace}/kfs-cfg-dbs",
         timeout  => "720",
-        require  => File["${workspace}"]
+        require  => File["${workspace}"],
+        user     => 'kuali'
     }
 
     file { "${workspace}/kfs-cfg-dbs":
@@ -265,6 +268,7 @@ class kfsdeveloper {
 
     exec { "demo-impex-load" :
         command  => "ant -Dimpex.properties.file=${workspace}/impex-build.properties drop-schema create-schema import",
+        user     => 'kuali',
         timeout  => "3600",
         cwd      => "${workspace}/kul-cfg-dbs/impex",
         require  => [ File["demo-impex-build-properties"], 
