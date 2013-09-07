@@ -114,10 +114,10 @@ class kfsdeveloper {
     }
 
     file { [ "${home}/kuali", "${home}/kuali/main",
-             "${settings}", "${workspace} ] :
+             "${settings}", "${workspace}" ] :
         ensure  => directory,
-        owner   => "kuali",
-        group   => "kuali",
+        owner   => kuali,
+        group   => kuali,
         notify  => Exec['svn-checkout-kfs']
     }       
 
