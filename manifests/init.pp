@@ -265,13 +265,23 @@ class kfsdeveloper {
         path    => "${workspace}/impex-build.properties"
     }
 
+    file { "kfs-build.properties" :
+        ensure  => present,
+        owner   => kuali,
+        group   => kuali,
+        mode    => 0755,
+        content => template('impex-build-properties.erb'),
+        path    => "${workspace}/impex-build.properties"
+    }
+
     file { "demo-kfs-build-properties" :
         ensure  => present,
         owner   => kuali,
         group   => kuali,
         mode    => 0755,
         path    => "${workspace}/kfs-build.properties",
-        content => template('kfs-build-properties.erb')
+        content => template('kfs-build-properties.erb'),
+        require => Exec['demo-kfs-build-properties']
     }
 
     exec { "demo-impex-load" :
