@@ -121,11 +121,12 @@ class kfsdeveloper {
         notify  => Exec['svn-checkout-kfs']
     }
 
-    file { "${home}/.bash_profile" :
-        ensure  => present,
+    file { 'bash-profile' :
+        ensure  => file,
         owner   => kuali,
         group   => kuali,
-        source  => 'puppet:///modules/kfsdeveloper/bash_profile',
+        path    => "${home}/.bash_profile",
+        source  => 'puppet:///modules/kfsdeveloper/bash_profile'
     }
 
     exec { "svn-checkout-kfs" :
