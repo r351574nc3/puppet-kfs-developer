@@ -127,7 +127,7 @@ class kfsdeveloper {
         group   => kuali,
         path    => "${home}/.bash_profile",
         source  => 'puppet:///modules/kfsdeveloper/bash_profile',
-        notify  => 'source-bash-profile'
+        notify  => Exec['source-bash-profile']
     }
 
     exec { 'source-bash-profile' :
