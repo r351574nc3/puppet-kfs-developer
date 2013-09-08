@@ -294,7 +294,7 @@ class kfsdeveloper {
     }
 
     exec { "demo-impex-load" :
-        command  => "ant -Dimpex.properties.file=${workspace}/impex-build.properties drop-schema create-schema import",
+        command  => "ant -Xmx2g -XX:MaxPermSize=256m -Dimpex.properties.file=${workspace}/impex-build.properties drop-schema create-schema import",
         timeout  => "3600",
         cwd      => "${workspace}/kul-cfg-dbs/impex",
         require  => [ File["demo-impex-build-properties"], 
