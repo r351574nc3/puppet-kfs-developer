@@ -282,7 +282,7 @@ class kfsdeveloper {
         group   => kuali,
         mode    => 0755,
         path    => "${workspace}/kfs-build.properties",
-        content => template('modules/kfsdeveloper/kfs-build-properties.erb'),
+        content => template('kfs-build-properties.erb'),
         require => File['kfs-build.properties']
     }
 
