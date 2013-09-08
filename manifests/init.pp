@@ -207,56 +207,56 @@ class kfsdeveloper {
         require => Exec['svn-checkout-impex']
     }
 
-    exec { "svn-checkout-kfs-cfg-dbs" :
-        command  => "svn co http://svn.kuali.org/repos/kfs/legacy/cfg-dbs/branches/release-5-0/ ${workspace}/kfs-cfg-dbs",
-        creates  => "${workspace}/kfs-cfg-dbs",
-        timeout  => "720",
-        require  => File["${workspace}"],
-        user     => 'kuali'
-    }
+#    exec { "svn-checkout-kfs-cfg-dbs" :
+#        command  => "svn co http://svn.kuali.org/repos/kfs/legacy/cfg-dbs/branches/release-5-0/ ${workspace}/kfs-cfg-dbs",
+#        creates  => "${workspace}/kfs-cfg-dbs",
+#        timeout  => "720",
+#        require  => File["${workspace}"],
+#        user     => 'kuali'
+#    }
 
-    file { "${workspace}/kfs-cfg-dbs":
-        ensure => "directory",
-        owner  => "kuali",
-        group  => "kuali",
-        require => Exec['svn-checkout-kfs-cfg-dbs']
-    }
+#    file { "${workspace}/kfs-cfg-dbs":
+#        ensure => "directory",
+#        owner  => "kuali",
+#        group  => "kuali",
+#        require => Exec['svn-checkout-kfs-cfg-dbs']
+#    }
 
 
-    file { "datasets" :
-        ensure  => directory,
-        owner   => kuali,
-        group   => kuali,       
-        path    => "${workspace}/datasets",
-        require => Exec["svn-checkout-kfs-cfg-dbs"],
-        notify  => File["datasets-rice"]
-    }
+#    file { "datasets" :
+#        ensure  => directory,
+#        owner   => kuali,
+#        group   => kuali,       
+#        path    => "${workspace}/datasets",
+#        require => Exec["svn-checkout-kfs-cfg-dbs"],
+#        notify  => File["datasets-rice"]
+#    }
 
-    file { "datasets-rice" :
-        ensure  => link,
-        owner   => kuali,
-        group   => kuali,
-        path    => "${workspace}/datasets/rice",
-        target  => "${workspace}/kfs-cfg-dbs/rice-demo",
-        require => Exec["svn-checkout-kfs-cfg-dbs"],
-        notify  => File["datasets-kfs"]
-    }
+#    file { "datasets-rice" :
+#        ensure  => link,
+#        owner   => kuali,
+#        group   => kuali,
+#        path    => "${workspace}/datasets/rice",
+#       target  => "${workspace}/kfs-cfg-dbs/rice-demo",
+#        require => Exec["svn-checkout-kfs-cfg-dbs"],
+#        notify  => File["datasets-kfs"]
+#    }
 
-    file { "datasets-kfs" :
-        ensure  => link,
-        owner   => kuali,
-        group   => kuali,
-        path    => "${workspace}/datasets/kfs-demo",
-        target  => "${workspace}/kfs-cfg-dbs/demo",
-        require => Exec["svn-checkout-kfs-cfg-dbs"],
-        notify  => Exec["chown-workspace"]
-    }
+#    file { "datasets-kfs" :
+#        ensure  => link,
+#        owner   => kuali,
+#        group   => kuali,
+#        path    => "${workspace}/datasets/kfs-demo",
+#        target  => "${workspace}/kfs-cfg-dbs/demo",
+#        require => Exec["svn-checkout-kfs-cfg-dbs"],
+#        notify  => Exec["chown-workspace"]
+#    }
 
-    exec { "chown-workspace" :
-        command => "chown -R kuali:kuali ${workspace}",
-        unless  => "[ `stat -c %U ${workspace}` == kuali ]",
-        require => Exec['svn-checkout-kfs-cfg-dbs']
-    }
+#    exec { "chown-workspace" :
+#        command => "chown -R kuali:kuali ${workspace}",
+#        unless  => "[ `stat -c %U ${workspace}` == kuali ]",
+#        require => File["${workspace}"]
+#    }
 
     file { "demo-impex-build-properties" :
         ensure  => present,
@@ -293,21 +293,21 @@ class kfsdeveloper {
 #        user     => 'kuali'
 #    }
 
-    exec { "demo-impex-load" :
-        command  => "ant -Dimpex.properties.file=${workspace}/impex-build.properties drop-schema create-schema import",
-        timeout  => "3600",
-        cwd      => "${workspace}/kul-cfg-dbs/impex",
-        require  => [ File["demo-impex-build-properties"], 
-                      File["demo-kfs-build-properties"],
-                      Archive::Extract["apache-ant-1.9.2-bin"], 
-                      File['datasets-kfs'],
-                      File['datasets-rice'],
-                      File["/usr/bin/ant"], 
-                      File['SpringContext.java'],
-                      File['PurchasingDocument.java'],
-                      File['BatchSortUtil.java'],
-                      File['BatchSortServiceImpl.java'] ],
- #                     Exec['dist-local'] ],
-        user     => 'kuali'
-    }
+#    exec { "demo-impex-load" :
+#        command  => "ant -Dimpex.properties.file=${workspace}/impex-build.properties drop-schema create-schema import",
+#        timeout  => "3600",
+#        cwd      => "${workspace}/kul-cfg-dbs/impex",
+#        require  => [ File["demo-impex-build-properties"], 
+#                      File["demo-kfs-build-properties"],
+#                      Archive::Extract["apache-ant-1.9.2-bin"], 
+#                      File['datasets-kfs'],
+#                      File['datasets-rice'],
+#                      File["/usr/bin/ant"], 
+#                      File['SpringContext.java'],
+#                      File['PurchasingDocument.java'],
+#                      File['BatchSortUtil.java'],
+#                      File['BatchSortServiceImpl.java'] ],
+#                      Exec['dist-local'] ],
+#        user     => 'kuali'
+#    }
 }
