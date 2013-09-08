@@ -130,7 +130,7 @@ class kfsdeveloper {
         notify  => 'source-bash-profile'
     }
 
-    exec { "svn-checkout-kfs" :
+    exec { 'source-bash-profile' :
         command => "source ${home}/.bash_profile",
         user    => kuali
     }
