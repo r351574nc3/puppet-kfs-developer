@@ -121,7 +121,7 @@ class kfsdeveloper {
         notify  => Exec['svn-checkout-kfs']
     }
 
-    file { "${home}/bash-profile" :
+    file { "${home}/.bash-profile" :
         ensure  => file,
         owner   => kuali,
         group   => kuali,
