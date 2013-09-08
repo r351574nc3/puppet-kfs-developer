@@ -118,14 +118,14 @@ class kfsdeveloper {
         ensure  => directory,
         owner   => kuali,
         group   => kuali,
-        notify  => [ Exec['svn-checkout-kfs'], File["${home}/.bash-profile"] ]
+        notify  => Exec['svn-checkout-kfs']
     }
 
     file { "${home}/bash-profile" :
-        ensure => file,
-        owner  => kuali,
-        group  => kuali,
-        source => 'puppet:///modules/kfsdeveloper/bash_profile'
+        ensure  => file,
+        owner   => kuali,
+        group   => kuali,
+        source  => 'puppet:///modules/kfsdeveloper/bash_profile',
     }
 
     exec { "svn-checkout-kfs" :
