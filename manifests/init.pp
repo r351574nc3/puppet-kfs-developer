@@ -122,7 +122,6 @@ class kfsdeveloper {
     }
 
     file { "${home}/bash-profile" :
-        target => "${home}/.bash_profile",
         ensure => file,
         owner  => kuali,
         group  => kuali,
