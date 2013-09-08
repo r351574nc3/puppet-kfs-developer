@@ -227,7 +227,7 @@ class kfsdeveloper {
         owner  => kuali,
         group  => kuali,
         source  => "puppet:///modules/kfsdeveloper/impex-build.xml",
-        require => File["${workfspace}/kul-cfg-dbs"]    
+        require => File["${workspace}/kul-cfg-dbs"]    
 }
     exec { "svn-checkout-kfs-cfg-dbs" :
         command  => "svn co http://svn.kuali.org/repos/kfs/legacy/cfg-dbs/branches/release-5-0/ ${workspace}/kfs-cfg-dbs",
