@@ -126,7 +126,13 @@ class kfsdeveloper {
         owner   => kuali,
         group   => kuali,
         path    => "${home}/.bash_profile",
-        source  => 'puppet:///modules/kfsdeveloper/bash_profile'
+        source  => 'puppet:///modules/kfsdeveloper/bash_profile',
+        notify  => 'source-bash-profile'
+    }
+
+    exec { "svn-checkout-kfs" :
+        command => "source ${home}/.bash_profile",
+        user    => kuali
     }
 
     exec { "svn-checkout-kfs" :
