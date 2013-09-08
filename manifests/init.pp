@@ -118,8 +118,16 @@ class kfsdeveloper {
         ensure  => directory,
         owner   => kuali,
         group   => kuali,
-        notify  => Exec['svn-checkout-kfs']
-    }       
+        notify  => [ Exec['svn-checkout-kfs'], File['bash-profile'] ]
+    }
+
+    file { 'bash-profile' :
+        target => "${home}/.bash_profile",
+        ensure => file,
+        owner  => kuali,
+        group  => kuali,
+        source => 'puppet:///modules/kfsdeveloper/bash_profile'
+    }
 
     exec { "svn-checkout-kfs" :
         command  => "svn co https://svn.kuali.org/repos/kfs/tags/releases/release-4-1-1/ ${workspace}/kfs-4.1.1",
@@ -294,7 +302,7 @@ class kfsdeveloper {
     }
 
     exec { "demo-impex-load" :
-        command  => "ant -Xmx2g -XX:MaxPermSize=256m -Dimpex.properties.file=${workspace}/impex-build.properties drop-schema create-schema import",
+        command  => "ant -Dimpex.properties.file=${workspace}/impex-build.properties drop-schema create-schema import",
         timeout  => "3600",
         cwd      => "${workspace}/kul-cfg-dbs/impex",
         require  => [ File["demo-impex-build-properties"], 
