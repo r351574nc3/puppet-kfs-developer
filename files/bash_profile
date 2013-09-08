@@ -7,9 +7,9 @@ fi
 
 # User specific environment and startup programs
 JAVA_HOME=/usr/java/latest
-JAVA_OPTS=
-ANT_OPTS="-Xmx2g -XX:MaxPermSize=256m"
-MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=256m"
+ANT_OPTS="-Xmx1g -XX:MaxPermSize=256m"
+JAVA_OPTS="-Xmx1g -XX:MaxPermSize=256m"
+MAVEN_OPTS="-Xmx1g -XX:MaxPermSize=256m"
 PATH=$PATH:$HOME/.local/bin:$HOME/bin
 
 export PATH JAVA_HOME JAVA_OPTS ANT_OPTS MAVEN_OPTS

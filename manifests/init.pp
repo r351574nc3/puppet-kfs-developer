@@ -198,7 +198,7 @@ class kfsdeveloper {
     }
 
     file { 'BatchSortUtil.java':
-        path    => '/home/kuali/workspace/kfs/work/src/org/kuali/kfs/gl/batch/BatchSortUtil.java',
+        path    => "${workfspace}/kfs/work/src/org/kuali/kfs/gl/batch/BatchSortUtil.java",
         owner   => 'kuali',
         group   => 'kuali',
         ensure  => present,
@@ -221,6 +221,14 @@ class kfsdeveloper {
         require => Exec['svn-checkout-impex']
     }
 
+    file { "${workspace}/kul-cfg-dbs/impex/build.xml":
+        path   => "${workfspace}/kul-cfg-dbs/impex/build.xml"
+        ensure => file,
+        owner  => kuali,
+        group  => kuali,
+        source  => "puppet:///modules/kfsdeveloper/impex-build.xml",
+        require => File["${workfspace}/kul-cfg-dbs"]    
+}
     exec { "svn-checkout-kfs-cfg-dbs" :
         command  => "svn co http://svn.kuali.org/repos/kfs/legacy/cfg-dbs/branches/release-5-0/ ${workspace}/kfs-cfg-dbs",
         creates  => "${workspace}/kfs-cfg-dbs",
