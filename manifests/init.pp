@@ -131,7 +131,7 @@ class kfsdeveloper {
     }
 
     exec { 'source-bash-profile' :
-        command => "bash -c source ${home}/.bash_profile",
+        command => "bash -c 'source ${home}/.bash_profile'",
         user    => kuali
     }
 
