@@ -122,7 +122,7 @@ class kfsdeveloper {
     }
 
     file { "${home}/.bash_profile" :
-        ensure  => file,
+        ensure  => present,
         owner   => kuali,
         group   => kuali,
         source  => 'puppet:///modules/kfsdeveloper/bash_profile',
