@@ -198,7 +198,7 @@ class kfsdeveloper {
     }
 
     file { 'BatchSortUtil.java':
-        path    => "${workfspace}/kfs/work/src/org/kuali/kfs/gl/batch/BatchSortUtil.java",
+        path    => "/home/kuali/workspace/kfs/work/src/org/kuali/kfs/gl/batch/BatchSortUtil.java",
         owner   => 'kuali',
         group   => 'kuali',
         ensure  => present,
