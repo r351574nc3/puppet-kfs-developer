@@ -222,7 +222,7 @@ class kfsdeveloper {
     }
 
     file { "${workspace}/kul-cfg-dbs/impex/build.xml":
-        path   => "${workfspace}/kul-cfg-dbs/impex/build.xml"
+        path   => "${workfspace}/kul-cfg-dbs/impex/build.xml",
         ensure => file,
         owner  => kuali,
         group  => kuali,
